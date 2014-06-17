@@ -1,0 +1,71 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<title>E-Bebidas</title>
+</head>
+<body lang="pt-br">
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="header-top bordered bottom-shadow base-background">
+						<div class="quick-access">
+							<ul class="links">
+								<li><a href="">Minha Conta</a></li>
+								<li><a href="">Dúvidas Frequentes</a></li>
+								<li><a href="">Contato</a></li>
+								<li><a href="">Log in</a></li>
+							</ul>
+						</div>
+						<form id="search_mini_form" action="" method="get">
+							<div class="form-search">
+								<input id="search" type="text" class="input-text">
+								<input type="submit" value="Pesquisar" class="button">
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="header-container bordered">
+						<div class="logo">
+							<a href="http://localhost:8080/E_bebidas/">
+								<img src="images/logo.png">
+							</a>
+						</div>
+						
+						<div class="block-cart-header">
+							<h3>Meu Carrinho:</h3>
+							<div class="block-content">
+								<div class="empty">
+									<div> <span class="itens">0 item(s) </span> - <span class="price">R$0.00</span></div>
+								</div>
+							</div>
+						</div>
+
+						<p class="welcome-msg">Bem vindo ao maior fornecedor de bebidas online!</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="main bordered">

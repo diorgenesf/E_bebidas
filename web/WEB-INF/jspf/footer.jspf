@@ -1,0 +1,98 @@
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="footer bordered">
+						<div class="footer-cols-wrapper">
+							<div class="footer-col footer-col-ex">
+								<h4>Informações<span class="toggle"></span></h4>
+								<div class="footer-col-content">
+									<ul>
+										<li><a href="">Sobre Nós</a></li>
+										<li><a href="">Mapa do Site</a></li>
+										<li><a href="">Dúvidas Frequentes</a></li>
+										<li><a href="">Contato</a></li>
+										<li class="last privacy"><a href="">Politica de Privacidade</a></li>
+									</ul>
+								</div>
+							</div>
+						
+
+							<div class="footer-col footer-col-ex">
+								<h4>Porque comprar de nós? <span class="toggle"></span></h4>
+								<div class="footer-col-content">
+									<ul>
+										<li><a href="">Trocas &amp; Devoluções</a></li>
+										<li><a href="">Segurança</a></li>
+										<li><a href="">Diversidade</a></li>
+										<li><a href="">Frete Gratuito</a></li>
+										<li><a href="">Ofertas &amp; Promoções</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="footer-col footer-col-ex">
+								<h4>Minha Conta<span class="toggle"></span></h4>
+								<div class="footer-col-content">
+									<ul>
+										<li><a href="">Log in</a></li>
+										<li><a href="">Visualizar Carro</a></li>
+										<li><a href="">Lista de Desejos</a></li>
+										<li><a href="">Concluir Pedido</a></li>
+										<li><a href="">Ajuda</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="footer-col last footer-col-ex">
+								<div class="block block-subscribe">
+									<div class="block-title">
+										<strong>Newsletter</strong>
+									</div>
+									<form action="" method="post" id="newsletter-validate-detail">
+										<div class="block-content">
+											<div class="input-box">
+												<input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email form-control">
+											</div>
+											<div class="actions">
+												<button type="submit" title="Subscribe" class="button"><span><span>Ir!</span></span></button>
+											</div>
+										</div>
+									</form>
+
+								</div>
+								<div class="paypal-logo">
+									<a href="#" title="Additional Options"><img src="images/bnr_nowAccepting_150x60.gif" alt="Additional Options" title="Additional Options"></a>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-container-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="footer">
+						<div class="footer-shadow">
+							<address>© 2014 Diorgenes Ferreira. All Rights Reserved.</address>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

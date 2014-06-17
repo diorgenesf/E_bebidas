@@ -1,0 +1,2 @@
+
+INSERT INTO `ebebidas`.`categoria` (`idcategoria`, `titulo`) VALUES (NULL, 'Vermouth (Martini)'), (NULL, 'Cerveja'), (NULL, 'Espumante'), (NULL, 'Sidra'), (NULL, 'Vinho'), (NULL, 'Cachaça'), (NULL, 'Conhaque'), (NULL, 'Gin'), (NULL, 'Licores'), (NULL, 'Rum'), (NULL, 'Saquê'), (NULL, 'Tequila'), (NULL, 'Champagne'), (NULL, 'Whisky');
