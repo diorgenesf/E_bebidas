@@ -58,12 +58,12 @@ public class ControllerServlet extends HttpServlet {
             
             if(categoryID != null)
             {
-                System.out.println("categoryID: "+categoryID);
+                //System.out.println("categoryID: "+categoryID);
                 int offset = 0;
                 if (request.getParameter("offset")!=null) offset=Integer.parseInt(request.getParameter("offset"));
                 offset *=6;
-                System.out.println("Offset: "+offset);
-                System.out.println("Order: "+request.getParameter("order"));
+                //System.out.println("Offset: "+offset);
+                //System.out.println("Order: "+request.getParameter("order"));
                 String orderV = "titulo";
                 String orderF = "ASC";
                 if(request.getParameter("order") != null)
@@ -109,7 +109,14 @@ public class ControllerServlet extends HttpServlet {
         // if checkout page is requested
         }else if (userPath.equals("/produto")) {
             // TODO: Implement cart page request
-
+            String produtoID = request.getQueryString();
+            if(produtoID!=null)
+            {
+                Produto selectedProduct = produtoFacade.find(Integer.parseInt(produtoID));
+                
+                request.setAttribute("selectedProduct", selectedProduct);
+            }
+            
             userPath = "/produto";
 
         // if checkout page is requested

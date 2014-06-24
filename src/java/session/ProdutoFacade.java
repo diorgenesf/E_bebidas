@@ -50,9 +50,10 @@ public class ProdutoFacade extends AbstractFacade<Produto> {
     
     public List<Produto> findProdutosByCategory(int idcat, int limit, int offset, String orderByElement, String orderByAction)
     {
-        Categoria c = new CategoriaFacade().find(idcat);        
-        Query query =em.createQuery("SELECT p FROM Produto p WHERE p.idcategoria = ? ORDER BY p."+orderByElement+" "+orderByAction,Categoria.class);
-        query.setParameter(1, c);
+        //Categoria c = new CategoriaFacade().find(idcat);    
+        String s = "SELECT p FROM Produto p WHERE p.idcategoria.idcategoria = "+idcat+" ORDER BY p."+orderByElement+" "+orderByAction;
+        System.out.println("Query: "+s);
+        Query query =em.createQuery(s);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         List<Produto> prods = query.getResultList();

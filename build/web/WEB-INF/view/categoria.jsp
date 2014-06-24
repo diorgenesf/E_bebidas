@@ -1,11 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 
 <c:set var="offset" value="${pageContext.request.getParameter('offset') eq null ? 0 : pageContext.request.getParameter('offset') }"/>
 
 <%--
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <c:choose>
     <c:when test="${pageContext.request.getParameter('order') eq null}">
        <c:set var="orderV" value="titulo"/>
@@ -42,8 +41,7 @@
 <sql:query var="produtos" dataSource="jdbc/ebebidas">
     <c:out value="${sql}"/>
 </sql:query>
---%>
-<%--
+
 <sql:query var="categories" dataSource="jdbc/ebebidas">
     SELECT * FROM CATEGORIA
 </sql:query>
