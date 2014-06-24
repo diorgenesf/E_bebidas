@@ -19,6 +19,7 @@
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
+    <!--
     <resource-ref>
         <description>Connects to database for AffableBean application</description>
         <res-ref-name>jdbc/ebebidas</res-ref-name>
@@ -26,4 +27,5 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    -->
 </web-app>

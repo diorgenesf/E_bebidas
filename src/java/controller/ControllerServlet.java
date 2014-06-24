@@ -6,12 +6,18 @@
 
 package controller;
 
+import entity.Categoria;
+import entity.Produto;
 import java.io.IOException;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.CategoriaFacade;
+import session.ProdutoFacade;
 
 /**
  *
@@ -27,6 +33,18 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @EJB
+    private CategoriaFacade categoryFacade;
+    @EJB
+    private ProdutoFacade produtoFacade;
+
+    public void init() throws ServletException {
+        // store category list in servlet context
+        getServletContext().setAttribute("categories", categoryFacade.findAll());
+        getServletContext().setAttribute("novos_produtos", produtoFacade.findNovos());
+        getServletContext().setAttribute("mais_vendidos", produtoFacade.findMaisVendidos());
+    }
+        
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -36,6 +54,50 @@ public class ControllerServlet extends HttpServlet {
         // if categoria page is requested
         if (userPath.equals("/categoria")) {
             // TODO: Implement categoria request
+            String categoryID = request.getParameter("id");
+            
+            if(categoryID != null)
+            {
+                System.out.println("categoryID: "+categoryID);
+                int offset = 0;
+                if (request.getParameter("offset")!=null) offset=Integer.parseInt(request.getParameter("offset"));
+                offset *=6;
+                System.out.println("Offset: "+offset);
+                System.out.println("Order: "+request.getParameter("order"));
+                String orderV = "titulo";
+                String orderF = "ASC";
+                if(request.getParameter("order") != null)
+                {
+                    switch(request.getParameter("order"))
+                    {
+                        case "T-ASC":
+                            orderV = "titulo";
+                            orderF = "ASC";
+                            break;
+                        case "T-DESC":
+                            orderV = "titulo";
+                            orderF = "DESC";
+                            break;
+                        case "P-ASC":
+                            orderV = "valorUnitario";
+                            orderF = "ASC";
+                            break;
+                        case "P-DESC":
+                            orderV = "valorUnitario";
+                            orderF = "DESC";
+                            break;
+                        default :
+                            orderV = "titulo";
+                            orderF = "ASC";
+                            break;
+                    }
+                }
+                Categoria selectedCategory = categoryFacade.find(Integer.parseInt(categoryID));
+                request.setAttribute("selectedCategory", selectedCategory);
+                
+                Collection<Produto> categoryProducts = produtoFacade.findProdutosByCategory(Integer.parseInt(categoryID), 6, offset, orderV, orderF);
+                request.setAttribute("categoryProducts", categoryProducts);
+            }
             userPath = "/categoria";
 
         // if cart page is requested

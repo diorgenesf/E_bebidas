@@ -2,8 +2,10 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
 <c:set var="offset" value="${pageContext.request.getParameter('offset') eq null ? 0 : pageContext.request.getParameter('offset') }"/>
 
+<%--
 <c:choose>
     <c:when test="${pageContext.request.getParameter('order') eq null}">
        <c:set var="orderV" value="titulo"/>
@@ -18,30 +20,34 @@
        <c:set var="orderF" value="DESC"/>
     </c:when>
     <c:when test="${pageContext.request.getParameter('order') eq 'P-ASC'}">
-       <c:set var="orderV" value="valor_unitario"/>
+       <c:set var="orderV" value="valorUnitario"/>
        <c:set var="orderF" value="ASC"/>
     </c:when>
     <c:when test="${pageContext.request.getParameter('order') eq 'P-DESC'}">
-       <c:set var="orderV" value="valor_unitario"/>
+       <c:set var="orderV" value="valorUnitario"/>
        <c:set var="orderF" value="DESC"/>
     </c:when>
 </c:choose>
+
 
 <sql:query var="categoria" dataSource="jdbc/ebebidas">
     SELECT * FROM CATEGORIA WHERE idcategoria = ?
     <sql:param value="${pageContext.request.getParameter('id')}"/>
 </sql:query>
+
     
 <c:set var="sql" value="SELECT * FROM PRODUTO WHERE idcategoria = ${pageContext.request.getParameter('id')} ORDER BY ${orderV} ${orderF} LIMIT 6 OFFSET ${offset*6}"/>
-    
+
+
 <sql:query var="produtos" dataSource="jdbc/ebebidas">
     <c:out value="${sql}"/>
 </sql:query>
-
-    
+--%>
+<%--
 <sql:query var="categories" dataSource="jdbc/ebebidas">
     SELECT * FROM CATEGORIA
 </sql:query>
+--%>
     
 
 <div class="row">
@@ -51,7 +57,7 @@
             <div class="block-title base-background"><span>Categorias</span></div>
             <div class="block-content">
                 <ul>
-                    <c:forEach var="category" items="${categories.rows}">
+                    <c:forEach var="category" items="${categories}">
                         <li class="item">
                             <a href="categoria?id=${category.idcategoria}">${category.titulo}</a>
                         </li>
@@ -69,7 +75,7 @@
     <div class="col-main col-xs-9">
 
         <div class="page-title category-title base-background category">
-            <h1>${categoria.rows[0].titulo}</h1>
+            <h1>${selectedCategory.titulo}</h1>
         </div>
 
         <div class="page-title category-title row-pagination">
@@ -101,7 +107,7 @@
         </div>
 
         <ul class="products-grid row">
-            <c:forEach var="produto" items="${produtos.rows}">
+            <c:forEach var="produto" items="${categoryProducts}">
                 <li class="item col-xs-4">
                     <div class="wrapper-hover">
                         <a href="produto?${produto.idproduto}" class="product-image">
@@ -111,10 +117,10 @@
                             <div class="price-box-border">
                                 <div class="price-box">
                                     <p class="old-price">
-                                        <span class="price">R$ ${produto.valor_unitario}</span>
+                                        <span class="price">R$ ${produto.valorUnitario}</span>
                                     </p>
                                     <p class="special-price">
-                                        <span class="price">R$ ${produto.valor_unitario - produto.desconto}</span>
+                                        <span class="price">R$ ${produto.valorUnitario - produto.desconto}</span>
                                     </p>
                                 </div>
                             </div>
