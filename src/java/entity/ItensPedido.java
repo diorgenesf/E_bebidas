@@ -7,7 +7,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ItensPedido.findAll", query = "SELECT i FROM ItensPedido i"),
-    @NamedQuery(name = "ItensPedido.findByIditens", query = "SELECT i FROM ItensPedido i WHERE i.iditens = :iditens"),
-    @NamedQuery(name = "ItensPedido.findByValorProduto", query = "SELECT i FROM ItensPedido i WHERE i.valorProduto = :valorProduto")})
+    @NamedQuery(name = "ItensPedido.findByIditens", query = "SELECT i FROM ItensPedido i WHERE i.iditens = :iditens")})
 public class ItensPedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,11 +37,6 @@ public class ItensPedido implements Serializable {
     @Basic(optional = false)
     @Column(name = "iditens")
     private Integer iditens;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "valor_produto")
-    private BigDecimal valorProduto;
     @JoinColumn(name = "idpedido", referencedColumnName = "idpedido")
     @ManyToOne(optional = false)
     private Pedido idpedido;
@@ -59,25 +51,12 @@ public class ItensPedido implements Serializable {
         this.iditens = iditens;
     }
 
-    public ItensPedido(Integer iditens, BigDecimal valorProduto) {
-        this.iditens = iditens;
-        this.valorProduto = valorProduto;
-    }
-
     public Integer getIditens() {
         return iditens;
     }
 
     public void setIditens(Integer iditens) {
         this.iditens = iditens;
-    }
-
-    public BigDecimal getValorProduto() {
-        return valorProduto;
-    }
-
-    public void setValorProduto(BigDecimal valorProduto) {
-        this.valorProduto = valorProduto;
     }
 
     public Pedido getIdpedido() {

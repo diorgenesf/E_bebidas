@@ -6,6 +6,7 @@
 
 package controller;
 
+import cart.ShoppingCart;
 import entity.Categoria;
 import entity.Produto;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import session.CategoriaFacade;
 import session.ProdutoFacade;
 
@@ -33,6 +35,8 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private String surcharge;
+    
     @EJB
     private CategoriaFacade categoryFacade;
     @EJB
@@ -50,6 +54,7 @@ public class ControllerServlet extends HttpServlet {
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
 
         // if categoria page is requested
         if (userPath.equals("/categoria")) {
@@ -102,7 +107,13 @@ public class ControllerServlet extends HttpServlet {
 
         // if cart page is requested
         } else if (userPath.equals("/carrinho")) {
-            // TODO: Implement cart page request
+            String clear = request.getParameter("clear");
+
+            if ((clear != null) && clear.equals("true")) {
+
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+                cart.clear();
+            }
 
             userPath = "/carrinho";
 
@@ -122,6 +133,13 @@ public class ControllerServlet extends HttpServlet {
         // if checkout page is requested
         } else if (userPath.equals("/finalizar")) {
             // TODO: Implement checkout page request
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+            // calculate total
+            cart.calculateTotal(surcharge);
+
+            // forward to checkout page and switch to a secure channel
+            
             userPath = "/finalizar";
         // if user switches language
         } 
@@ -148,22 +166,46 @@ public class ControllerServlet extends HttpServlet {
     throws ServletException, IOException {
 
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();  
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
         // if addCarrinho action is called
         if (userPath.equals("/addCarrinho")) {
             // TODO: Implement add product to cart action
+            if (cart == null) {
 
+                cart = new ShoppingCart();
+                session.setAttribute("cart", cart);
+            }
+
+            // get user input from request
+            String productId = request.getParameter("productId");
+
+            if (!productId.isEmpty()) {
+
+                Produto product = produtoFacade.find(Integer.parseInt(productId));
+                cart.addItem(product);
+            }
+            userPath = "/categoria";
         // if updateCart action is called
         } 
-        /*else if (userPath.equals("/updateCart")) {
+        else if (userPath.equals("/updateCarrinho")) {
             // TODO: Implement update cart action
+            // get input from request
+            String productId = request.getParameter("productId");
+            String quantity = request.getParameter("quantity");
+
+            Produto product = produtoFacade.find(Integer.parseInt(productId));
+            cart.update(product, quantity);
+
+            userPath = "/carrinho";
 
         // if compra action is called
-        }*/ 
+        }
         else if (userPath.equals("/compra")) {
             // TODO: Implement compra action
 
-            userPath = "/confirmacao";
+            userPath = "/finalizar";
         }
 
         // use RequestDispatcher to forward request internally

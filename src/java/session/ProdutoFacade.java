@@ -6,14 +6,12 @@
 
 package session;
 
-import entity.Categoria;
 import entity.Produto;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.jboss.weld.bean.builtin.FacadeInjectionPoint;
 
 /**
  *
@@ -27,6 +25,10 @@ public class ProdutoFacade extends AbstractFacade<Produto> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public ProdutoFacade() {
+        super(Produto.class);
     }
     
     /*
@@ -59,9 +61,4 @@ public class ProdutoFacade extends AbstractFacade<Produto> {
         List<Produto> prods = query.getResultList();
         return prods;
     }
-    
-    public ProdutoFacade() {
-        super(Produto.class);
-    }
-    
 }

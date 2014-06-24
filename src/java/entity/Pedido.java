@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedido.findByIdpedido", query = "SELECT p FROM Pedido p WHERE p.idpedido = :idpedido"),
     @NamedQuery(name = "Pedido.findByStatus", query = "SELECT p FROM Pedido p WHERE p.status = :status"),
     @NamedQuery(name = "Pedido.findByData", query = "SELECT p FROM Pedido p WHERE p.data = :data"),
-    @NamedQuery(name = "Pedido.findByDesconto", query = "SELECT p FROM Pedido p WHERE p.desconto = :desconto")})
+    @NamedQuery(name = "Pedido.findByValorTotal", query = "SELECT p FROM Pedido p WHERE p.valorTotal = :valorTotal")})
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,13 +63,10 @@ public class Pedido implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "desconto")
-    private BigDecimal desconto;
+    @Column(name = "valorTotal")
+    private BigDecimal valorTotal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido")
     private Collection<ItensPedido> itensPedidoCollection;
-    @JoinColumn(name = "idendereco", referencedColumnName = "idendereco")
-    @ManyToOne(optional = false)
-    private Endereco idendereco;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne(optional = false)
     private Usuario username;
@@ -81,11 +78,11 @@ public class Pedido implements Serializable {
         this.idpedido = idpedido;
     }
 
-    public Pedido(Integer idpedido, String status, Date data, BigDecimal desconto) {
+    public Pedido(Integer idpedido, String status, Date data, BigDecimal valorTotal) {
         this.idpedido = idpedido;
         this.status = status;
         this.data = data;
-        this.desconto = desconto;
+        this.valorTotal = valorTotal;
     }
 
     public Integer getIdpedido() {
@@ -112,12 +109,12 @@ public class Pedido implements Serializable {
         this.data = data;
     }
 
-    public BigDecimal getDesconto() {
-        return desconto;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setDesconto(BigDecimal desconto) {
-        this.desconto = desconto;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     @XmlTransient
@@ -127,14 +124,6 @@ public class Pedido implements Serializable {
 
     public void setItensPedidoCollection(Collection<ItensPedido> itensPedidoCollection) {
         this.itensPedidoCollection = itensPedidoCollection;
-    }
-
-    public Endereco getIdendereco() {
-        return idendereco;
-    }
-
-    public void setIdendereco(Endereco idendereco) {
-        this.idendereco = idendereco;
     }
 
     public Usuario getUsername() {

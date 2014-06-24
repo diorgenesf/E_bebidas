@@ -13,8 +13,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -91,14 +89,7 @@ public class Usuario implements Serializable {
     @Column(name = "type")
     private String type;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<Endereco> enderecoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private Collection<Pedido> pedidoCollection;
-    @JoinColumn(name = "idendereco_default", referencedColumnName = "idendereco")
-    @ManyToOne
-    private Endereco idenderecoDefault;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Avaliacao> avaliacaoCollection;
 
     public Usuario() {
     }
@@ -198,38 +189,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Endereco> getEnderecoCollection() {
-        return enderecoCollection;
-    }
-
-    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
-        this.enderecoCollection = enderecoCollection;
-    }
-
-    @XmlTransient
     public Collection<Pedido> getPedidoCollection() {
         return pedidoCollection;
     }
 
     public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
         this.pedidoCollection = pedidoCollection;
-    }
-
-    public Endereco getIdenderecoDefault() {
-        return idenderecoDefault;
-    }
-
-    public void setIdenderecoDefault(Endereco idenderecoDefault) {
-        this.idenderecoDefault = idenderecoDefault;
-    }
-
-    @XmlTransient
-    public Collection<Avaliacao> getAvaliacaoCollection() {
-        return avaliacaoCollection;
-    }
-
-    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
-        this.avaliacaoCollection = avaliacaoCollection;
     }
 
     @Override

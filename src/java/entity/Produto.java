@@ -90,8 +90,6 @@ public class Produto implements Serializable {
     private Categoria idcategoria;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproduto")
     private Collection<ItensPedido> itensPedidoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private Collection<Avaliacao> avaliacaoCollection;
 
     public Produto() {
     }
@@ -197,15 +195,6 @@ public class Produto implements Serializable {
 
     public void setItensPedidoCollection(Collection<ItensPedido> itensPedidoCollection) {
         this.itensPedidoCollection = itensPedidoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Avaliacao> getAvaliacaoCollection() {
-        return avaliacaoCollection;
-    }
-
-    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
-        this.avaliacaoCollection = avaliacaoCollection;
     }
 
     @Override
